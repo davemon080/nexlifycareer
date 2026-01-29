@@ -1,4 +1,3 @@
-
 export enum RoleType {
   SOFTWARE_DEVELOPER = 'Software Developer'
 }
@@ -17,6 +16,7 @@ export interface ApplicationFormData {
   isImmediatelyAvailable: string;
   compensationPreference: string;
   salaryExpectation: string;
+  currency: string;
   portfolioSamples: string;
   location: string;
   lastFinishedProject: string;
