@@ -161,9 +161,12 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-indigo-100 pb-20">
       <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 group cursor-pointer" onClick={() => setStep('form')}>
-            <div className="w-8 h-8 bg-indigo-600 rounded shadow-sm flex items-center justify-center font-black text-white transform transition-transform group-hover:scale-105">N</div>
-            <span className="font-bold text-lg tracking-tight">Nexlify <span className="text-indigo-600">Careers</span></span>
+          <div className="flex items-center gap-3 group cursor-pointer" onClick={() => setStep('form')}>
+            <div className="w-9 h-9 bg-indigo-600 rounded-lg shadow-sm flex items-center justify-center font-black text-white transform transition-transform group-hover:scale-105 shrink-0">N</div>
+            <div className="flex flex-col">
+              <span className="font-bold text-lg tracking-tight leading-tight">Nexlify <span className="text-indigo-600">Careers</span></span>
+              <span className="text-[10px] font-architect font-bold text-indigo-500/80 uppercase tracking-[0.15em] -mt-0.5 animate-architect-continuous inline-block">Senior Software Architect</span>
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden sm:block text-xs font-bold text-slate-400 uppercase tracking-widest">
@@ -176,22 +179,10 @@ const App: React.FC = () => {
       <main className="max-w-4xl mx-auto px-4 py-8 md:py-12">
         {step === 'form' && (
           <div className="animate-in fade-in slide-in-from-right-4 duration-400">
-            <div className="mb-10 text-center">
-              <h1 className="text-3xl md:text-5xl font-black mb-3 text-slate-900 tracking-tight">{jobInfo.title}</h1>
-              <p className="text-slate-500 max-w-xl mx-auto text-lg leading-relaxed">{jobInfo.description}</p>
+            <div className="mb-14 text-center">
+              <h1 className="text-3xl md:text-5xl font-black mb-4 text-slate-900 tracking-tight uppercase">Proposed Equity Package</h1>
+              <p className="text-slate-500 max-w-xl mx-auto text-lg leading-relaxed italic">"Significant early-stage equity package"</p>
             </div>
-
-            {jobInfo.equityTerms && (
-              <div className="mb-12 bg-white border border-indigo-100 rounded-3xl p-8 shadow-sm flex flex-col md:flex-row items-center gap-8 animate-in fade-in zoom-in duration-700">
-                <div className="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-indigo-100">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <div>
-                  <h4 className="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-1">Proposed Equity Package</h4>
-                  <p className="text-slate-700 font-medium text-base whitespace-pre-wrap">{jobInfo.equityTerms}</p>
-                </div>
-              </div>
-            )}
 
             <form onSubmit={handleSubmit} className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden">
               <div className="p-6 md:p-12 space-y-12">
