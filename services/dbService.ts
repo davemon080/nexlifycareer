@@ -64,7 +64,9 @@ export const saveApplication = async (data: ApplicationFormData): Promise<boolea
         current_project,
         email,
         phone,
-        applied_role
+        applied_role,
+        cv_data,
+        cv_name
       ) VALUES (
         ${data.firstName},
         ${data.lastName},
@@ -83,7 +85,9 @@ export const saveApplication = async (data: ApplicationFormData): Promise<boolea
         ${data.currentProject},
         ${data.email},
         ${`${data.phoneAreaCode}-${data.phoneNumber}`},
-        ${data.appliedRole}
+        ${data.appliedRole},
+        ${data.cvData},
+        ${data.cvName}
       )
     `;
 

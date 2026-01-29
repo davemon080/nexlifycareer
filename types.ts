@@ -25,6 +25,8 @@ export interface ApplicationFormData {
   phoneAreaCode: string;
   phoneNumber: string;
   appliedRole: RoleType;
+  cvData: string; // Base64 encoded file data
+  cvName: string; // Original filename
 }
 
 export interface JobDetail {

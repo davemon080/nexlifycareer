@@ -66,7 +66,9 @@ const App: React.FC = () => {
     email: '',
     phoneAreaCode: '',
     phoneNumber: '',
-    appliedRole: RoleType.SOFTWARE_DEVELOPER
+    appliedRole: RoleType.SOFTWARE_DEVELOPER,
+    cvData: '',
+    cvName: ''
   };
 
   const [formData, setFormData] = useState<ApplicationFormData>(initialFormData);
@@ -86,6 +88,27 @@ const App: React.FC = () => {
       });
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size exceeds 5MB. Please upload a smaller CV.");
+        e.target.value = '';
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({
+          ...prev,
+          cvData: reader.result as string,
+          cvName: file.name
+        }));
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -238,6 +261,26 @@ const App: React.FC = () => {
                     <option value="">Please Select</option>
                     {EXPERIENCE_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
+                </div>
+
+                <div className="space-y-4">
+                  <SectionTitle title="CV / Resume" sub="Attach your CV in PDF, DOC, or image format (Max 5MB)" required />
+                  <div className="flex flex-col gap-2">
+                    <label className="w-full sm:w-1/2 flex flex-col items-center justify-center px-4 py-8 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-indigo-400 hover:bg-white transition-all group">
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg className="w-8 h-8 mb-4 text-slate-400 group-hover:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        <p className="mb-2 text-sm text-slate-500"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p className="text-xs text-slate-400">PDF, DOC, DOCX, PNG, JPG (MAX. 5MB)</p>
+                      </div>
+                      <input required type="file" className="hidden" accept=".pdf,.doc,.docx,image/*" onChange={handleFileChange} />
+                    </label>
+                    {formData.cvName && (
+                      <div className="flex items-center gap-2 text-emerald-600 font-bold text-sm px-2 animate-in fade-in slide-in-from-top-1">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                        File selected: {formData.cvName}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="space-y-4">

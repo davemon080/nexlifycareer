@@ -32,6 +32,8 @@ CREATE TABLE applicants (
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(50),
     applied_role VARCHAR(100),
+    cv_data TEXT, -- Stores base64 encoded CV file
+    cv_name VARCHAR(255), -- Stores the name of the file
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -47,7 +49,7 @@ The app is currently linked with:
 - **User:** `neondb_owner`
 
 ### Security Note
-In a production environment, database credentials should be stored on a server-side environment (Node.js/Next.js backend) to prevent them from being visible in the browser's network tab.
+In a production environment, database credentials should be stored on a server-side environment (Node.js/Next.js backend) to prevent them from being visible in the browser's network tab. CV data is stored as a Base64 string in the `cv_data` column.
 
 ## Run Locally
 
